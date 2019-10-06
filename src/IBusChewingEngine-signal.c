@@ -205,6 +205,7 @@ IBusText *decorate_pre_edit(IBusChewingPreEdit * icPreEdit,
                                IBUS_ATTR_UNDERLINE_SINGLE,
                                0, charLen);
 
+#if 0
     IntervalType it;
 
     chewing_interval_Enumerate(icPreEdit->context);
@@ -218,6 +219,7 @@ IBusText *decorate_pre_edit(IBusChewingPreEdit * icPreEdit,
                                        it.from, it.to);
         }
     }
+#endif
 
     /* Use background color to show current cursor */
     if (chiSymbolCursor < charLen) {
@@ -248,6 +250,7 @@ void update_pre_edit_text(IBusChewingEngine * self)
 {
     refresh_pre_edit_text(self);
     gboolean visible = TRUE;
+    gint bpmfLen = self->icPreEdit->bpmfLen;
 
     IBusPreeditFocusMode mode;
 
@@ -260,7 +263,7 @@ void update_pre_edit_text(IBusChewingEngine * self)
 
     parent_update_pre_edit_text_with_mode(IBUS_ENGINE(self),
                                           self->preEditText,
-                                          cursor_current, visible, mode);
+                                          cursor_current + bpmfLen, visible, mode);
 }
 
 void refresh_aux_text(IBusChewingEngine * self)
